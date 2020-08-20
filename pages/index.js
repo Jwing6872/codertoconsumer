@@ -1,30 +1,49 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
-export default function Home() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
+export default function NestedGrid() {
+  const classes = useStyles();
+
+  function FormRow() {
+    return (
+      <React.Fragment>
+        <Grid item md={6}>
+          <Paper className={classes.paper}>item</Paper>
+        </Grid>
+       
+        <Grid item md={6}>
+          <Paper className={classes.paper}>item</Paper>
+        </Grid>
+      </React.Fragment>
+    );
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">c2c</a>
-        </h1>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+    <div className={classes.root}>
+      <Grid container spacing={1}>
+        <Grid container item md={12} spacing={3}>
+          <FormRow />
+        </Grid>
+        <Grid container item md={12} spacing={3}>
+          <FormRow />
+        </Grid>
+        <Grid container item md={12} spacing={3}>
+          <FormRow />
+        </Grid>
+      </Grid>
     </div>
   );
 }
